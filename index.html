@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezel Inks</title>
+    <style>
+        /* Base page styling */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff; /* White background */
+            overflow: hidden; /* Prevents scrollbars during zoom animation */
+            font-family: sans-serif;
+        }
+
+        /* Elements that will fade and move back */
+        .fade-bg {
+            transition: all 1.8s ease-in-out;
+        }
+
+        .watermark {
+            width: 300px; /* Adjust based on your drawing */
+            margin-bottom: 40px;
+            z-index: 2;
+        }
+
+        /* Tiny stars scattered via absolute positioning */
+        .tiny-star {
+            position: absolute;
+            width: 40px; /* Adjust size as needed */
+            z-index: 1;
+        }
+        .star-1 { top: 15%; left: 15%; }
+        .star-2 { top: 20%; right: 20%; }
+        .star-3 { bottom: 30%; left: 20%; }
+        .star-4 { bottom: 35%; right: 15%; }
+
+        /* The interactive big star button */
+        .enter-btn-container {
+            position: relative;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .big-star {
+            width: 250px; /* Adjust based on your drawing */
+            transition: transform 1.8s ease-in-out;
+        }
+
+        .enter-text {
+            position: absolute;
+            color: #000;
+            font-size: 1.2rem;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none; /* Lets clicks pass through to the star */
+        }
+
+        /* --- ANIMATION STATES --- */
+        /* Triggered by JavaScript when clicked */
+        
+        body.animate-out .fade-bg {
+            transform: scale(0.6);
+            opacity: 0.1;
+        }
+
+        body.animate-out .big-star {
+            /* Rotates and scales up massively to fill screen */
+            transform: scale(25) rotate(180deg); 
+        }
+
+        body.animate-out .enter-text {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Scattered Tiny Stars -->
+    <img src="small-star.png" class="fade-bg tiny-star star-1" alt="">
+    <img src="small-star.png" class="fade-bg tiny-star star-2" alt="">
+    <img src="small-star.png" class="fade-bg tiny-star star-3" alt="">
+    <img src="small-star.png" class="fade-bg tiny-star star-4" alt="">
+
+    <!-- Main Watermark -->
+    <img src="watermark.png" class="fade-bg watermark" alt="Ezel Inks">
+
+    <!-- Big Star Button -->
+    <div class="enter-btn-container" id="enterButton">
+        <img src="big-star.png" class="big-star" alt="Enter Star">
+        <span class="enter-text">enter</span>
+    </div>
+
+    <script>
+        document.getElementById('enterButton').addEventListener('click', function() {
+            // Adds the class to trigger the CSS animations
+            document.body.classList.add('animate-out');
+            
+            // Waits 1.8 seconds (matching the animation length) then redirects
+            setTimeout(function() {
+                window.location.href = 'menu.html';
+            }, 1800);
+        });
+    </script>
+</body>
+</html>
