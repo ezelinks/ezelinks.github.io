@@ -19,7 +19,7 @@
         /* --- CORNER LOGO --- */
         .corner-logo {
             position: absolute;
-            top: 25px;
+            top: 15px; /* Moved higher up */
             right: 40px;
             width: 150px;
             z-index: 1000;
@@ -73,11 +73,10 @@
         /* --- SCATTERED BACKGROUND STARS --- */
         .bg-star {
             position: absolute;
-            width: 60px;
             animation: spin 15s linear infinite;
             filter: invert(1); /* Turns your white star black */
             z-index: 0; /* Keeps them behind the question boxes */
-            pointer-events: none; /* Makes them un-clickable so they don't block anything */
+            pointer-events: none; /* Makes them un-clickable */
         }
         
         @keyframes spin {
@@ -85,15 +84,19 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Scattered Star Placements (Kept out of the center) */
-        .star-1 { top: 350px; left: 8%; width: 50px; }
-        .star-2 { top: 450px; right: 10%; width: 70px; }
-        .star-3 { top: 700px; left: 12%; width: 80px; }
-        .star-4 { top: 850px; right: 8%; width: 45px; }
+        /* Scattered Star Placements (8 stars now) */
+        .star-1 { top: 250px; left: 8%; width: 50px; }
+        .star-2 { top: 400px; right: 10%; width: 70px; }
+        .star-3 { top: 580px; left: 12%; width: 80px; }
+        .star-4 { top: 750px; right: 8%; width: 45px; }
+        .star-5 { top: 920px; left: 6%; width: 60px; }
+        .star-6 { top: 1080px; right: 11%; width: 55px; }
+        .star-7 { top: 1250px; left: 9%; width: 40px; }
+        .star-8 { top: 1400px; right: 7%; width: 65px; }
 
         /* --- FAQ / PRICING ACCORDION --- */
         .faq-container {
-            max-width: 800px; /* Constrains the width nicely in the center */
+            max-width: 800px; 
             margin: 0 auto 60px auto;
             padding: 0 20px;
             z-index: 10;
@@ -184,9 +187,9 @@
 
         /* --- MOBILE VIEW --- */
         @media (max-width: 768px) {
-            .corner-logo { top: 15px; right: 15px; width: 75px; }
+            /* Pushed the logo even higher */
+            .corner-logo { top: 8px; right: 15px; width: 75px; }
             
-            /* Pushed header down to clear the logo */
             .header-section { margin-top: 100px; }
             .title-img { width: 280px; }
             .book-btn { width: 200px; }
@@ -200,11 +203,18 @@
             .eng-text { font-size: 1rem; }
             .turk-text { font-size: 0.85rem; }
 
-            /* Push background stars further outwards on tiny screens */
-            .star-1 { left: -10px; width: 40px; }
-            .star-2 { right: -15px; width: 50px; }
-            .star-3 { left: -10px; width: 45px; }
-            .star-4 { right: -5px; width: 35px; }
+            /* Creates a 35px "Safe Lane" padding on the left and right for the stars */
+            .faq-container { padding: 0 35px; }
+
+            /* Pushes all 8 stars into the Safe Lanes so they never overlap the boxes */
+            .star-1 { top: 300px; left: -10px; width: 35px; }
+            .star-2 { top: 450px; right: -15px; width: 45px; }
+            .star-3 { top: 600px; left: -5px; width: 40px; }
+            .star-4 { top: 750px; right: -10px; width: 35px; }
+            .star-5 { top: 900px; left: -15px; width: 45px; }
+            .star-6 { top: 1050px; right: -5px; width: 35px; }
+            .star-7 { top: 1200px; left: -10px; width: 40px; }
+            .star-8 { top: 1350px; right: -15px; width: 30px; }
         }
     </style>
 </head>
@@ -215,11 +225,15 @@
         <img src="watermark.png" class="corner-logo" alt="Ezel Inks">
     </a>
 
-    <!-- Background Scattered Stars -->
+    <!-- Background Scattered Stars (8 Stars) -->
     <img src="star-pricing.png" class="bg-star star-1" alt="">
     <img src="star-pricing.png" class="bg-star star-2" alt="">
     <img src="star-pricing.png" class="bg-star star-3" alt="">
     <img src="star-pricing.png" class="bg-star star-4" alt="">
+    <img src="star-pricing.png" class="bg-star star-5" alt="">
+    <img src="star-pricing.png" class="bg-star star-6" alt="">
+    <img src="star-pricing.png" class="bg-star star-7" alt="">
+    <img src="star-pricing.png" class="bg-star star-8" alt="">
 
     <!-- Header Section -->
     <div class="header-section">
@@ -334,15 +348,11 @@
 
     <script>
         // --- ACCORDION LOGIC ---
-        // Selects all the black header bars
         const faqHeaders = document.querySelectorAll('.faq-header');
 
         faqHeaders.forEach(header => {
             header.addEventListener('click', () => {
-                // Finds the whole box (header + content) that was clicked
                 const faqItem = header.parentElement;
-                
-                // Toggle the 'active' class to open/close it
                 faqItem.classList.toggle('active');
             });
         });
