@@ -119,10 +119,36 @@
                 width: 100px;
             }
         }
+ /* CORNER LOGO STYLING */
+        .corner-logo {
+            position: fixed;
+            top: 25px;
+            right: 40px;
+            width: 150px; /* Adjust this to change the logo size */
+            z-index: 1000; /* Ensures it stays on top of everything else */
+            transition: transform 0.3s ease;
+        }
+
+        /* Adding this class flips the black image to white */
+        .invert-white {
+            filter: invert(1);
+        }
+
+        /* Mobile adjustments for the corner logo */
+        @media (max-width: 768px) {
+            .corner-logo {
+                top: 15px;
+                right: 15px;
+                width: 100px; /* Makes it smaller on phone screens */
+            }
+        } 
     </style>
 </head>
 <body>
-
+<a href="menu.html">
+    <img src="watermark.png" class="corner-logo invert-white" alt="Ezel Inks">
+</a>
+    
     <!-- The white overlay that fades in -->
     <div id="white-overlay"></div>
 
