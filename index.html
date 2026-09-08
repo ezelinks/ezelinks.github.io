@@ -19,7 +19,7 @@
             font-family: sans-serif;
         }
 
-        /* NEW: Black screen overlay for a smooth transition */
+        /* Black screen overlay for a smooth transition */
         #black-overlay {
             position: fixed;
             top: 0;
@@ -38,12 +38,12 @@
             transition: opacity 1s ease-in-out;
         }
 
-.watermark {
-    width: 480px; /* Increased from 300px to make it significantly bigger */
-    margin-bottom: 15px; /* Reduced from 40px to push it downwards, closer to the star */
-    margin-top: 40px; /* Added to push the entire image down from the top of the screen */
-    z-index: 2;
-}
+        /* UPDATED: Watermark is now bigger and pushed down */
+        .watermark {
+            width: 480px; 
+            margin-bottom: 15px; 
+            margin-top: 40px; 
+            z-index: 2;
         }
 
         /* Tiny stars scattered via absolute positioning */
@@ -51,22 +51,21 @@
             position: absolute;
             width: 40px; 
             z-index: 1;
-            /* NEW: Constant rotation animation */
+            /* Constant rotation animation */
             animation: spin 10s linear infinite;
         }
 
-        /* NEW: The rotation logic for the small stars */
+        /* The rotation logic for the small stars */
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* Original Stars */
+        /* Small Star Placements */
         .star-1 { top: 15%; left: 15%; }
         .star-2 { top: 20%; right: 20%; }
         .star-3 { bottom: 30%; left: 20%; }
         .star-4 { bottom: 35%; right: 15%; }
-        /* NEW: Stars placed on the red marks from your image */
         .star-5 { top: 38%; left: 8%; }
         .star-6 { top: 40%; right: 28%; }
 
@@ -80,7 +79,7 @@
             justify-content: center;
         }
 
-        /* NEW: Made the big star much larger */
+        /* Big star sizing */
         .big-star {
             width: 450px; 
             transition: transform 1.8s ease-in-out;
@@ -93,12 +92,12 @@
             opacity: 0;
         }
 
-        /* NEW: Rotates and scales up massively to fill screen */
+        /* Rotates and scales up massively to fill screen */
         body.animate-out .big-star {
             transform: scale(60) rotate(180deg); 
         }
 
-        /* NEW: Fades the whole screen to black so the text inside the star gets hidden smoothly */
+        /* Fades the whole screen to black so the text inside the star gets hidden smoothly */
         body.animate-out #black-overlay {
             opacity: 1;
         }
