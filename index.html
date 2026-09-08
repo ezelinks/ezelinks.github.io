@@ -38,10 +38,12 @@
             transition: opacity 1s ease-in-out;
         }
 
-        .watermark {
-            width: 300px;
-            margin-bottom: 40px;
-            z-index: 2;
+.watermark {
+    width: 480px; /* Increased from 300px to make it significantly bigger */
+    margin-bottom: 15px; /* Reduced from 40px to push it downwards, closer to the star */
+    margin-top: 40px; /* Added to push the entire image down from the top of the screen */
+    z-index: 2;
+}
         }
 
         /* Tiny stars scattered via absolute positioning */
