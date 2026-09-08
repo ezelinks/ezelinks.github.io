@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ezel Inks - Menu</title>
+    <style>
+        /* Base page styling */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000000; /* Black background */
+            overflow: hidden; /* Prevents scrollbars during zoom */
+            font-family: sans-serif;
+        }
+
+        /* White screen overlay for a smooth transition */
+        #white-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
+            opacity: 0; /* Hidden by default */
+            pointer-events: none;
+            z-index: 50; /* Sits between the background and the zooming star */
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        /* The container holding all 3 options perfectly centered */
+        .menu-container {
+            display: flex;
+            flex-direction: row;
+            gap: 80px; /* Space between the three options */
+            align-items: flex-end; /* Ensures all stars are perfectly aligned at the bottom */
+            z-index: 10;
+        }
+
+        /* Individual button containers */
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        /* Text Images */
+        .text-img {
+            width: 160px; /* Adjust this to make your text bigger/smaller */
+            margin-bottom: 25px; /* Space between text and star */
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Star Images */
+        .star-img {
+            width: 120px; /* Forces all 3 stars to be the exact same size */
+            transition: transform 1.8s ease-in-out;
+            z-index: 10;
+        }
+
+        /* --- ANIMATION STATES --- */
+        
+        /* 1. When an item is clicked, fade out the ones that were NOT clicked */
+        body.animating .menu-item:not(.selected) {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* 2. Fade out the text of the CLICKED item so it doesn't glitch when zooming */
+        body.animating .menu-item.selected .text-img {
+            opacity: 0;
+        }
+
+        /* 3. Scale up the CLICKED star massively and spin it */
+        body.animating .menu-item.selected .star-img {
+            transform: scale(80) rotate(180deg);
+            z-index: 100; /* Brings the zooming star to the very front */
+        }
+
+        /* 4. Fade the whole screen to white underneath the zooming star */
+        body.animating #white-overlay {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- The white overlay that fades in -->
+    <div id="white-overlay"></div>
+
+    <div class="menu-container">
+        
+        <!-- OPTION 1: Available Designs -->
+        <div class="menu-item" data-target="designs.html">
+            <img src="text-designs.png" class="text-img" alt="Available Designs">
+            <img src="star-designs.png" class="star-img" alt="Star">
+        </div>
+
+        <!-- OPTION 2: Pricing (Dead Center) -->
+        <div class="menu-item" data-target="pricing.html">
+            <img src="text-pricing.png" class="text-img" alt="Pricing">
+            <img src="star-pricing.png" class="star-img" alt="Star">
+        </div>
+
+        <!-- OPTION 3: Custom Design -->
+        <div class="menu-item" data-target="custom.html">
+            <img src="text-custom.png" class="text-img" alt="Custom Design">
+            <img src="star-custom.png" class="star-img" alt="Star">
+        </div>
+
+    </div>
+
+    <script>
+        // Select all of the menu items
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        // Add a click event to each one
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                
+                // 1. Get the target page (e.g., pricing.html) from the clicked item
+                const targetPage = this.getAttribute('data-target');
+
+                // 2. Mark this specific item as 'selected' so the CSS knows which one to zoom
+                this.classList.add('selected');
+
+                // 3. Add the 'animating' class to the body to trigger all CSS transitions
+                document.body.classList.add('animating');
+
+                // 4. Wait 1.8 seconds (length of the CSS zoom) then go to the new page
+                setTimeout(function() {
+                    window.location.href = targetPage;
+                }, 1800);
+            });
+        });
+    </script>
+</body>
+</html>
