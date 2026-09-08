@@ -13,22 +13,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #000000; /* Black background */
-            overflow: hidden; /* Prevents scrollbars during zoom */
+            background-color: #000000;
+            overflow: hidden;
             font-family: sans-serif;
         }
 
         /* White screen overlay for a smooth transition */
         #white-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             background-color: #ffffff;
-            opacity: 0; /* Hidden by default */
+            opacity: 0; 
             pointer-events: none;
-            z-index: 50; /* Sits between the background and the zooming star */
+            z-index: 50; 
             transition: opacity 1.5s ease-in-out;
         }
 
@@ -36,8 +34,8 @@
         .menu-container {
             display: flex;
             flex-direction: row;
-            gap: 80px; /* Space between the three options */
-            align-items: flex-end; /* Ensures all stars are perfectly aligned at the bottom */
+            gap: 80px; 
+            align-items: flex-end; 
             z-index: 10;
         }
 
@@ -48,46 +46,79 @@
             align-items: center;
             cursor: pointer;
             transition: opacity 0.8s ease-in-out;
+            position: relative;
         }
 
-        /* Text Images */
         .text-img {
-            width: 160px; /* Adjust this to make your text bigger/smaller */
-            margin-bottom: 25px; /* Space between text and star */
+            width: 160px; 
+            margin-bottom: 25px; 
             transition: opacity 0.5s ease-in-out;
         }
 
-        /* Star Images */
-        .star-img {
-            width: 120px; /* Forces all 3 stars to be the exact same size */
+        /* NEW: A wrapper to handle the zoom click without breaking the continuous spin */
+        .star-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 1.8s ease-in-out;
             z-index: 10;
         }
 
-        /* --- ANIMATION STATES --- */
+        /* NEW: Constant slow rotation for the stars */
+        .star-img {
+            width: 120px; 
+            animation: spin 12s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- ANIMATION STATES (Triggered on click) --- */
         
-        /* 1. When an item is clicked, fade out the ones that were NOT clicked */
+        /* 1. Dissolve whatever is NOT clicked */
         body.animating .menu-item:not(.selected) {
             opacity: 0;
             pointer-events: none;
         }
 
-        /* 2. Fade out the text of the CLICKED item so it doesn't glitch when zooming */
+        /* 2. Bring the CLICKED item to the front and hide its text */
+        body.animating .menu-item.selected {
+            z-index: 100;
+        }
         body.animating .menu-item.selected .text-img {
             opacity: 0;
         }
 
-        /* 3. Scale up the CLICKED star massively and spin it */
-        body.animating .menu-item.selected .star-img {
+        /* 3. Scale up the wrapper of the CLICKED star massively */
+        body.animating .menu-item.selected .star-wrapper {
             transform: scale(80) rotate(180deg);
-            z-index: 100; /* Brings the zooming star to the very front */
         }
 
-        /* 4. Fade the whole screen to white underneath the zooming star */
+        /* 4. Fade the whole screen to white */
         body.animating #white-overlay {
             opacity: 1;
         }
 
+        /* --- MOBILE VIEW --- */
+        @media (max-width: 768px) {
+            /* Stacks the 3 options vertically on phones */
+            .menu-container {
+                flex-direction: column;
+                gap: 50px; 
+                align-items: center; 
+            }
+            
+            /* Shrinks elements slightly to fit the screen nicely */
+            .text-img {
+                width: 140px; 
+                margin-bottom: 15px;
+            }
+            .star-img {
+                width: 100px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -100,41 +131,41 @@
         <!-- OPTION 1: Available Designs -->
         <div class="menu-item" data-target="designs.html">
             <img src="text-designs.png" class="text-img" alt="Available Designs">
-            <img src="star-designs.png" class="star-img" alt="Star">
+            <div class="star-wrapper">
+                <img src="star-designs.png" class="star-img" alt="Star">
+            </div>
         </div>
 
-        <!-- OPTION 2: Pricing (Dead Center) -->
+        <!-- OPTION 2: Pricing -->
         <div class="menu-item" data-target="pricing.html">
             <img src="text-pricing.png" class="text-img" alt="Pricing">
-            <img src="star-pricing.png" class="star-img" alt="Star">
+            <div class="star-wrapper">
+                <img src="star-pricing.png" class="star-img" alt="Star">
+            </div>
         </div>
 
         <!-- OPTION 3: Custom Design -->
         <div class="menu-item" data-target="custom.html">
             <img src="text-custom.png" class="text-img" alt="Custom Design">
-            <img src="star-custom.png" class="star-img" alt="Star">
+            <div class="star-wrapper">
+                <img src="star-custom.png" class="star-img" alt="Star">
+            </div>
         </div>
 
     </div>
 
     <script>
-        // Select all of the menu items
         const menuItems = document.querySelectorAll('.menu-item');
 
-        // Add a click event to each one
         menuItems.forEach(item => {
             item.addEventListener('click', function() {
-                
-                // 1. Get the target page (e.g., pricing.html) from the clicked item
                 const targetPage = this.getAttribute('data-target');
-
-                // 2. Mark this specific item as 'selected' so the CSS knows which one to zoom
+                
+                // Marks this item as clicked
                 this.classList.add('selected');
-
-                // 3. Add the 'animating' class to the body to trigger all CSS transitions
+                // Triggers the animations
                 document.body.classList.add('animating');
-
-                // 4. Wait 1.8 seconds (length of the CSS zoom) then go to the new page
+                
                 setTimeout(function() {
                     window.location.href = targetPage;
                 }, 1800);
