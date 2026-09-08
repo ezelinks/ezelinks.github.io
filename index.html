@@ -41,7 +41,7 @@
         /* UPDATED: Watermark is now bigger and pushed down */
         .watermark {
             width: 300px; 
-            margin-bottom: 0px; 
+            margin-bottom: -30px; 
             margin-top: 80px; 
             z-index: 2;
         }
@@ -101,6 +101,28 @@
         body.animate-out #black-overlay {
             opacity: 1;
         }
+/* MOBILE VIEW ADJUSTMENTS */
+        @media (max-width: 768px) {
+            /* Scales the watermark to fit phone screens instead of forcing a fixed width */
+            .watermark {
+                width: 85%;
+                margin-top: 20px;
+                margin-bottom: -10px;
+            }
+
+            /* Scales the big star down slightly for smaller screens */
+            .big-star {
+                width: 80vw; 
+            }
+
+            /* Pushes all tiny stars outward to the very edges of the screen */
+            .star-1 { top: 8%; left: 2%; }
+            .star-2 { top: 12%; right: 2%; }
+            .star-3 { bottom: 15%; left: 2%; }
+            .star-4 { bottom: 20%; right: 2%; }
+            .star-5 { top: 38%; left: 1%; }
+            .star-6 { top: 42%; right: 1%; }
+        }   
     </style>
 </head>
 <body>
