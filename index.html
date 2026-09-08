@@ -19,13 +19,27 @@
             font-family: sans-serif;
         }
 
-        /* Elements that will fade and move back */
+        /* NEW: Black screen overlay for a smooth transition */
+        #black-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            opacity: 0; /* Hidden by default */
+            pointer-events: none; /* Lets clicks pass through to the button */
+            z-index: 100; /* Stays on top of everything */
+            transition: opacity 1.5s ease-in-out; /* Fades in smoothly */
+        }
+
+        /* Elements that will fade away when clicked */
         .fade-bg {
-            transition: all 1.8s ease-in-out;
+            transition: opacity 1s ease-in-out;
         }
 
         .watermark {
-            width: 300px; /* Adjust based on your drawing */
+            width: 300px;
             margin-bottom: 40px;
             z-index: 2;
         }
@@ -33,13 +47,26 @@
         /* Tiny stars scattered via absolute positioning */
         .tiny-star {
             position: absolute;
-            width: 40px; /* Adjust size as needed */
+            width: 40px; 
             z-index: 1;
+            /* NEW: Constant rotation animation */
+            animation: spin 10s linear infinite;
         }
+
+        /* NEW: The rotation logic for the small stars */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Original Stars */
         .star-1 { top: 15%; left: 15%; }
         .star-2 { top: 20%; right: 20%; }
         .star-3 { bottom: 30%; left: 20%; }
         .star-4 { bottom: 35%; right: 15%; }
+        /* NEW: Stars placed on the red marks from your image */
+        .star-5 { top: 38%; left: 8%; }
+        .star-6 { top: 40%; right: 28%; }
 
         /* The interactive big star button */
         .enter-btn-container {
@@ -51,44 +78,42 @@
             justify-content: center;
         }
 
+        /* NEW: Made the big star much larger */
         .big-star {
-            width: 250px; /* Adjust based on your drawing */
+            width: 450px; 
             transition: transform 1.8s ease-in-out;
         }
 
-        .enter-text {
-            position: absolute;
-            color: #000;
-            font-size: 1.2rem;
-            transition: opacity 1s ease-in-out;
-            pointer-events: none; /* Lets clicks pass through to the star */
-        }
-
-        /* --- ANIMATION STATES --- */
-        /* Triggered by JavaScript when clicked */
+        /* --- ANIMATION STATES (Triggered by JavaScript) --- */
         
+        /* Fades out the background stars and watermark */
         body.animate-out .fade-bg {
-            transform: scale(0.6);
-            opacity: 0.1;
-        }
-
-        body.animate-out .big-star {
-            /* Rotates and scales up massively to fill screen */
-            transform: scale(25) rotate(180deg); 
-        }
-
-        body.animate-out .enter-text {
             opacity: 0;
+        }
+
+        /* NEW: Rotates and scales up massively to fill screen */
+        body.animate-out .big-star {
+            transform: scale(60) rotate(180deg); 
+        }
+
+        /* NEW: Fades the whole screen to black so the text inside the star gets hidden smoothly */
+        body.animate-out #black-overlay {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
+
+    <!-- The black overlay that fades in -->
+    <div id="black-overlay"></div>
 
     <!-- Scattered Tiny Stars -->
     <img src="small-star.png" class="fade-bg tiny-star star-1" alt="">
     <img src="small-star.png" class="fade-bg tiny-star star-2" alt="">
     <img src="small-star.png" class="fade-bg tiny-star star-3" alt="">
     <img src="small-star.png" class="fade-bg tiny-star star-4" alt="">
+    <img src="small-star.png" class="fade-bg tiny-star star-5" alt="">
+    <img src="small-star.png" class="fade-bg tiny-star star-6" alt="">
 
     <!-- Main Watermark -->
     <img src="watermark.png" class="fade-bg watermark" alt="Ezel Inks">
