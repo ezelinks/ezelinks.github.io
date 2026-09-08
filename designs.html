@@ -197,11 +197,17 @@
         }
         /* --- MOBILE VIEW --- */
         @media (max-width: 768px) {
-            .corner-logo { top: 15px; right: 15px; width: 100px; }
-            .title-img { width: 300px; }
+            /* Changed to absolute so it scrolls away instead of floating over tattoos */
+            .corner-logo { position: absolute; top: 15px; right: 15px; width: 90px; }
+            
+            /* Pushed header down slightly to clear the logo and shrunk title */
+            .header-section { margin-top: 80px; }
+            .title-img { width: 280px; }
             .book-btn { width: 200px; }
-            .header-star.left { left: 5%; }
-            .header-star.right { right: 5%; }
+            
+            /* Shrunk and repositioned stars to clear the text */
+            .header-star.left { top: -20px; left: 2%; width: 50px; }
+            .header-star.right { top: 60px; right: 2%; width: 45px; }
             
             .gallery-container { flex-direction: column; }
             .category-column {
