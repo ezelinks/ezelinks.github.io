@@ -195,17 +195,18 @@
         .return-menu-btn:hover {
             transform: scale(1.05);
         }
-        /* --- MOBILE VIEW --- */
+     /* --- MOBILE VIEW --- */
         @media (max-width: 768px) {
-            /* Changed to absolute so it scrolls away instead of floating over tattoos */
-            .corner-logo { position: absolute; top: 15px; right: 15px; width: 90px; }
+            /* Shrunk slightly more to 75px */
+            .corner-logo { position: absolute; top: 15px; right: 15px; width: 75px; }
             
-            /* Pushed header down slightly to clear the logo and shrunk title */
-            .header-section { margin-top: 80px; }
+            /* FIXED: Pushed the entire title block WAY down so it sits below the logo */
+            .header-section { margin-top: 120px; }
+            
             .title-img { width: 280px; }
             .book-btn { width: 200px; }
             
-            /* Shrunk and repositioned stars to clear the text */
+            /* Stars adjusted to clear the title */
             .header-star.left { top: -20px; left: 2%; width: 50px; }
             .header-star.right { top: 60px; right: 2%; width: 45px; }
             
