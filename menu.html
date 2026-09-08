@@ -197,6 +197,12 @@
                 }, 1800);
             });
         });
+// Detects if the page was loaded from the browser's back button cache
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.reload(); // Forces a fresh reload to reset animations
+            }
+        });   
     </script>
 </body>
 </html>
