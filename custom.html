@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Designs - Ezel Inks</title>
+    <style>
+        /* --- BASE STYLING & FONT --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: black;
+            overflow-x: hidden; 
+            position: relative; 
+        }
+
+        /* --- CORNER LOGO --- */
+        .corner-logo {
+            position: absolute;
+            top: -15px; 
+            right: 40px;
+            width: 150px;
+            z-index: 1000;
+        }
+
+        /* --- HEADER SECTION --- */
+        .header-section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 60px;
+            margin-bottom: 50px;
+            z-index: 10;
+        }
+
+        .title-img {
+            width: 350px; 
+            margin-bottom: 15px;
+        }
+
+        .book-btn {
+            width: 250px; 
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-bottom: 20px;
+        }
+
+        .book-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- HORIZONTAL SUB-BUTTONS --- */
+        .sub-nav-container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; 
+            justify-content: center;
+        }
+
+        .sub-btn {
+            width: 180px; 
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .sub-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- SCATTERED BACKGROUND STARS --- */
+        .bg-star {
+            position: absolute;
+            animation: spin 15s linear infinite;
+            filter: invert(1); /* Turns your white star black */
+            z-index: 0; 
+            pointer-events: none; 
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Scattered Star Placements for Desktop */
+        .star-1 { top: 320px; left: 8%; width: 50px; }
+        .star-2 { top: 480px; right: 10%; width: 70px; }
+        .star-3 { top: 700px; left: 5%; width: 60px; }
+        .star-4 { top: 850px; right: 8%; width: 45px; }
+        .star-5 { top: 1100px; left: 12%; width: 80px; }
+        .star-6 { top: 1250px; right: 9%; width: 55px; }
+
+        /* --- MAIN CONTENT CONTAINER --- */
+        .content-container {
+            max-width: 900px; /* Constrains the width nicely in the center */
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* --- INTRO TEXT BOX --- */
+        .intro-box {
+            border: 2px solid black;
+            padding: 25px 30px;
+            margin-bottom: 40px;
+            background-color: white;
+            line-height: 1.5;
+        }
+
+        /* --- 3 IMAGES GALLERY --- */
+        .custom-gallery {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .gallery-item {
+            flex: 1; /* Makes all 3 columns exactly equal width */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.05); /* Soft outline for white images */
+        }
+
+        /* --- TEXT STYLING (Used everywhere) --- */
+        .eng-text {
+            color: black;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .turk-text {
+            color: #666666; /* Gray */
+            font-size: 0.95rem; /* Slightly smaller */
+            font-style: italic;
+        }
+
+        /* Even smaller captions for under the images */
+        .caption-eng {
+            color: black;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .caption-turk {
+            color: #666666;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* --- FAQ / ACCORDION BOX --- */
+        .faq-item {
+            margin-bottom: 15px;
+        }
+
+        .faq-header {
+            background-color: black;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-header:hover {
+            background-color: #222;
+        }
+
+        .faq-icon {
+            width: 25px; 
+            margin-right: 15px;
+            transition: transform 0.3s ease; 
+        }
+
+        .faq-content {
+            display: none; 
+            border: 2px solid black;
+            border-top: none; 
+            padding: 25px 30px;
+            background-color: white;
+            line-height: 1.5;
+        }
+
+        .faq-item.active .faq-content {
+            display: block; 
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(90deg); 
+        }
+
+        /* --- RETURN TO MENU BUTTON --- */
+        .return-menu-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 80px; 
+            width: 100%;
+            z-index: 10;
+            position: relative;
+        }
+
+        .return-menu-btn {
+            width: 250px; 
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .return-menu-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- MOBILE VIEW --- */
+        @media (max-width: 768px) {
+            /* Keep logo highly pinned */
+            .corner-logo { top: -5px; right: 15px; width: 75px; }
+            
+            .header-section { margin-top: 100px; }
+            .title-img { width: 280px; }
+            .book-btn { width: 200px; }
+            
+            .sub-btn { width: 140px; }
+            .sub-nav-container { gap: 10px; }
+
+            /* Switch the 3 images to stack vertically on phones */
+            .custom-gallery { flex-direction: column; gap: 40px; }
+
+            .faq-header { font-size: 1rem; padding: 15px; }
+            .faq-icon { width: 20px; margin-right: 10px; }
+            
+            .intro-box, .faq-content { padding: 20px 15px; }
+            
+            /* Safe lane padding for content */
+            .content-container { padding: 0 35px; }
+
+            /* Push stars into the safe lanes */
+            .star-1 { top: 350px; left: -10px; width: 40px; }
+            .star-2 { top: 600px; right: -15px; width: 50px; }
+            .star-3 { top: 1100px; left: -5px; width: 45px; }
+            .star-4 { top: 1500px; right: -10px; width: 35px; }
+            .star-5 { top: 2000px; left: -15px; width: 50px; }
+            .star-6 { top: 2400px; right: -5px; width: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Watermark Logo -->
+    <a href="menu.html">
+        <img src="watermark.png" class="corner-logo" alt="Ezel Inks">
+    </a>
+
+    <!-- Background Scattered Stars -->
+    <img src="star-pricing.png" class="bg-star star-1" alt="">
+    <img src="star-pricing.png" class="bg-star star-2" alt="">
+    <img src="star-pricing.png" class="bg-star star-3" alt="">
+    <img src="star-pricing.png" class="bg-star star-4" alt="">
+    <img src="star-pricing.png" class="bg-star star-5" alt="">
+    <img src="star-pricing.png" class="bg-star star-6" alt="">
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <img src="title-custom.png" class="title-img" alt="Custom Tattoos">
+        
+        <a href="https://instagram.com/ezel.inks" target="_blank">
+            <img src="book-now.png" class="book-btn" alt="Book Now">
+        </a>
+        
+        <!-- Horizontal Links to other pages -->
+        <div class="sub-nav-container">
+            <a href="designs.html">
+                <img src="btn-designs.png" class="sub-btn" alt="Available Designs">
+            </a>
+            <a href="pricing.html">
+                <img src="btn-pricing.png" class="sub-btn" alt="Pricing">
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="content-container">
+        
+        <!-- Black Outlined Intro Box -->
+        <div class="intro-box">
+            <div class="eng-text">
+                If you like my illustration style but couldn't find exactly what you were looking for, a custom design might be the way to go! Here are a couple of custom pieces I designed, and the reasons behind them:
+            </div>
+            <div class="turk-text">
+                İllüstrasyon tarzımı sevdiysen ama tam aradığını bulamadıysan, özel bir tasarım yaptırmak sana göre olabilir! İşte daha önce yaptığım birkaç özel tasarım ve ortaya çıkış sebepleri:
+            </div>
+        </div>
+
+        <!-- 3 Images in a Row -->
+        <div class="custom-gallery">
+            
+            <!-- Image 1 -->
+            <div class="gallery-item">
+                <img src="custom-1.png" alt="Custom Tattoo 1">
+                <div class="caption-eng">Because he wanted a symbol he felt connected to.</div>
+                <div class="caption-turk">Bağ kurduğu bir sembol istedi.</div>
+            </div>
+
+            <!-- Image 2 -->
+            <div class="gallery-item">
+                <img src="custom-2.png" alt="Custom Tattoo 2">
+                <div class="caption-eng">Because he wanted a design that reflected his interests.</div>
+                <div class="caption-turk">İlgi alanlarını yansıtan bir tasarım istedi.</div>
+            </div>
+
+            <!-- Image 3 -->
+            <div class="gallery-item">
+                <img src="custom-3.png" alt="Custom Tattoo 3">
+                <div class="caption-eng">Because they had a sick witch sleeve with gaps to fill.</div>
+                <div class="caption-turk">Çok havalı bir cadı sleeve'inde doldurulması gereken boşlukları vardı.</div>
+            </div>
+
+        </div>
+
+        <!-- Accordion / Dropdown Box -->
+        <div class="faq-item">
+            <div class="faq-header">
+                <img src="star-pricing.png" class="faq-icon" alt="">
+                <span>So, how do I get one? / Peki nasıl yapıyoruz?</span>
+            </div>
+            <div class="faq-content">
+                <div class="eng-text">
+                    It all starts with a DM.<br><br>
+                    - You send me reference images for style and subject matter, along with information on sizing and placement. The more details you give me, the better.<br>
+                    - We talk about the design a little more. Once I know I can create something that excites you, I'll give you a price quote for the tattoo and ask for a 500 TL deposit (which will be deducted from the final).<br>
+                    - You pay the deposit. A week passes, and a design will be waiting for you in your inbox. If there are things you are unhappy with, we adjust it.<br>
+                    - We lock in the final design. We set up a time and place.<br>
+                    - You have a tattoo that no one else has. (And I will never repeat it on anyone else.)
+                </div>
+                <div class="turk-text">
+                    Her şey bir DM ile başlıyor.<br><br>
+                    - Bana istediğin tarz ve konuyla ilgili referanslar yolluyorsun; dövmenin yeri ve boyutu hakkında bilgi veriyorsun. Ne kadar detay verirsen o kadar iyi.<br>
+                    - Tasarımla ilgili biraz sohbetliyoruz. Seni heyecanlandıracak bir şey çizebileceğimden emin olduğumda dövmenin fiyatını belirliyorum ve toplam fiyattan düşülmek üzere 500 TL depozito rica ediyorum.<br>
+                    - Depozitoyu yolluyorsun. Bir hafta geçiyor ve gelen kutunda bir tasarım seni bekliyor. İçine sinmeyen detaylar olursa düzeltiyoruz.<br>
+                    - Tasarımı netleştiriyoruz. Zaman ve mekana karar veriyoruz.<br>
+                    - Başka kimsede olmayan bir dövmeye sahip oluyorsun. (Ve ben o dövmeyi asla bir başkasında tekrarlamıyorum.)
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- End of content container -->
+
+    <!-- Return to Menu Button -->
+    <div class="return-menu-container">
+        <a href="menu.html">
+            <img src="return-menu.png" class="return-menu-btn" alt="Return to Menu">
+        </a>
+    </div>
+
+    <script>
+        // --- ACCORDION LOGIC ---
+        const faqHeaders = document.querySelectorAll('.faq-header');
+
+        faqHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const faqItem = header.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // --- BACK BUTTON FIX ---
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.reload(); 
+            }
+        });
+    </script>
+</body>
+</html>
