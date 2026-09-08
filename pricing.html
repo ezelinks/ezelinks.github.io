@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Ezel Inks</title>
+    <style>
+        /* --- BASE STYLING & FONT --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: black;
+            overflow-x: hidden; 
+            position: relative; /* For the scattered background stars */
+        }
+
+        /* --- CORNER LOGO --- */
+        .corner-logo {
+            position: absolute;
+            top: 25px;
+            right: 40px;
+            width: 150px;
+            z-index: 1000;
+        }
+
+        /* --- HEADER SECTION --- */
+        .header-section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 60px;
+            margin-bottom: 50px;
+            z-index: 10;
+        }
+
+        .title-img {
+            width: 350px; 
+            margin-bottom: 15px;
+        }
+
+        .book-btn {
+            width: 250px; 
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin-bottom: 20px;
+        }
+
+        .book-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- HORIZONTAL SUB-BUTTONS --- */
+        .sub-nav-container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* Space between the two buttons */
+            justify-content: center;
+        }
+
+        .sub-btn {
+            width: 180px; /* Adjust size for the designs/custom buttons */
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .sub-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- SCATTERED BACKGROUND STARS --- */
+        .bg-star {
+            position: absolute;
+            width: 60px;
+            animation: spin 15s linear infinite;
+            filter: invert(1); /* Turns your white star black */
+            z-index: 0; /* Keeps them behind the question boxes */
+            pointer-events: none; /* Makes them un-clickable so they don't block anything */
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Scattered Star Placements (Kept out of the center) */
+        .star-1 { top: 350px; left: 8%; width: 50px; }
+        .star-2 { top: 450px; right: 10%; width: 70px; }
+        .star-3 { top: 700px; left: 12%; width: 80px; }
+        .star-4 { top: 850px; right: 8%; width: 45px; }
+
+        /* --- FAQ / PRICING ACCORDION --- */
+        .faq-container {
+            max-width: 800px; /* Constrains the width nicely in the center */
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+        }
+
+        /* The Black Question Box */
+        .faq-header {
+            background-color: black;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .faq-header:hover {
+            background-color: #222;
+        }
+
+        .faq-icon {
+            width: 25px; /* The white pricing star */
+            margin-right: 15px;
+            /* Star smoothly rotates 90deg when opened */
+            transition: transform 0.3s ease; 
+        }
+
+        /* The Hidden Answer Box */
+        .faq-content {
+            display: none; /* Hidden by default */
+            border: 2px solid black;
+            border-top: none; /* Connects it seamlessly to the black header */
+            padding: 25px 20px;
+            background-color: white;
+            line-height: 1.5;
+        }
+
+        /* When the item is clicked, this class is added via JavaScript */
+        .faq-item.active .faq-content {
+            display: block; 
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(90deg); /* Spins the star to show it's open */
+        }
+
+        /* English Text Styling */
+        .eng-text {
+            color: black;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        /* Turkish Text Styling */
+        .turk-text {
+            color: #666666; /* Gray */
+            font-size: 0.95rem; /* Slightly smaller */
+            font-style: italic;
+        }
+
+        /* --- RETURN TO MENU BUTTON --- */
+        .return-menu-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 80px; 
+            width: 100%;
+            z-index: 10;
+            position: relative;
+        }
+
+        .return-menu-btn {
+            width: 250px; 
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .return-menu-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- MOBILE VIEW --- */
+        @media (max-width: 768px) {
+            .corner-logo { top: 15px; right: 15px; width: 75px; }
+            
+            /* Pushed header down to clear the logo */
+            .header-section { margin-top: 100px; }
+            .title-img { width: 280px; }
+            .book-btn { width: 200px; }
+            
+            .sub-btn { width: 140px; }
+            .sub-nav-container { gap: 10px; }
+
+            .faq-header { font-size: 1rem; padding: 15px; }
+            .faq-icon { width: 20px; margin-right: 10px; }
+            
+            .eng-text { font-size: 1rem; }
+            .turk-text { font-size: 0.85rem; }
+
+            /* Push background stars further outwards on tiny screens */
+            .star-1 { left: -10px; width: 40px; }
+            .star-2 { right: -15px; width: 50px; }
+            .star-3 { left: -10px; width: 45px; }
+            .star-4 { right: -5px; width: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Watermark Logo -->
+    <a href="menu.html">
+        <img src="watermark.png" class="corner-logo" alt="Ezel Inks">
+    </a>
+
+    <!-- Background Scattered Stars -->
+    <img src="star-pricing.png" class="bg-star star-1" alt="">
+    <img src="star-pricing.png" class="bg-star star-2" alt="">
+    <img src="star-pricing.png" class="bg-star star-3" alt="">
+    <img src="star-pricing.png" class="bg-star star-4" alt="">
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <img src="title-pricing.png" class="title-img" alt="Pricing">
+        
+        <a href="https://instagram.com/ezel.inks" target="_blank">
+            <img src="book-now.png" class="book-btn" alt="Book Now">
+        </a>
+        
+        <!-- Horizontal Links to other pages -->
+        <div class="sub-nav-container">
+            <a href="designs.html">
+                <img src="btn-designs.png" class="sub-btn" alt="Available Designs">
+            </a>
+            <a href="custom.html">
+                <img src="btn-custom.png" class="sub-btn" alt="Custom Designs">
+            </a>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-container">
+        
+        <!-- Question 1 -->
+        <div class="faq-item">
+            <div class="faq-header">
+                <img src="star-pricing.png" class="faq-icon" alt="">
+                <span>How much???? / Kaç para???</span>
+            </div>
+            <div class="faq-content">
+                <div class="eng-text">
+                    The EXACT pricing on your chosen or custom tattoo will depend on its size and detail level. Right now, the estimated prices for my design categories are roughly:<br><br>
+                    - Illustrative: Around 10-12 cm, 2500 TL.<br>
+                    - Lino Print: Around 7-12 cm, 2000 TL.<br>
+                    - Tiny tatts: Around 3-5 cm, 1250 TL.<br><br>
+                    Please note that these are estimates, and we can always discuss details further via Instagram DMs.
+                </div>
+                <div class="turk-text">
+                    Seçtiğiniz veya Özel tasarım dövmenizin KESİN fiyatı, büyüklüğüne ve detay seviyesine bağlı olarak değişir. Şu an websitemde bulunan tasarım kategorilerine göre ortalama fiyatlar şöyle:<br><br>
+                    - İllüstratif: 10-12 cm civarı, 2500 TL.<br>
+                    - Linol Baskı: 7-12 cm civarı, 2000 TL.<br>
+                    - Minik tatular: 3-5 cm civarı, 1250 TL.<br><br>
+                    Bunların tahmini fiyatlar olduğunu ve Instagram üzerinden her zaman daha detaylı konuşabileceğimizi lütfen unutmayın.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="faq-item">
+            <div class="faq-header">
+                <img src="star-pricing.png" class="faq-icon" alt="">
+                <span>Why are they so cheap? / Neden fiyatlar ucuz?</span>
+            </div>
+            <div class="faq-content">
+                <div class="eng-text">
+                    The reason is twofold:<br>
+                    1- I do not work in a studio (which means we will be having the session elsewhere), therefore I'm not paying a cut.<br>
+                    2- I am still building my tattoo portfolio, which means I am just as excited as you for your tattoo.
+                </div>
+                <div class="turk-text">
+                    İki sebebi var:<br>
+                    1- Bir dövme stüdyosuna bağlı çalışmıyorum (bu, dövme seansımızı başka bir yerde yapacağımız anlamına geliyor), dolayısıyla komisyon ödemiyorum.<br>
+                    2- Dövme portfolyomu hala geliştiriyorum, yani sizin dövmeniz için en az sizin kadar heyecanlıyım.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="faq-item">
+            <div class="faq-header">
+                <img src="star-pricing.png" class="faq-icon" alt="">
+                <span>Why is it that much? / Neden fiyatlar pahalı?</span>
+            </div>
+            <div class="faq-content">
+                <div class="eng-text">
+                    The reason is (again) twofold:<br>
+                    1- Everything I use during the tattoo process is single-use, except for my machine (and the materials I use to disinfect it are single-use too). I need to be able to cover the cost of supplies to make this sustainable.<br>
+                    2- All the designs you see on my website are hand-drawn, and my time should also be worth something.
+                </div>
+                <div class="turk-text">
+                    Bunun da (yine) iki sebebi var:<br>
+                    1- Dövme sırasında kullandığım her şey, makinem hariç (ki onu dezenfekte ederken kullandığım malzemeler de dahil) tek kullanımlık. Bu işi sürdürülebilir kılmak için malzeme maliyetlerini karşılayabilmem gerekiyor.<br>
+                    2- Websitemde gördüğünüz bütün tasarımlar bana ait, ve zamanımın da bir değeri olması gerekiyor.
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="faq-item">
+            <div class="faq-header">
+                <img src="star-pricing.png" class="faq-icon" alt="">
+                <span>I REALLY want one, but its out of my budget :( / Birini ÇOK istiyorum ama bütçemin dışında :(</span>
+            </div>
+            <div class="faq-content">
+                <div class="eng-text">
+                    Send me a DM.
+                </div>
+                <div class="turk-text">
+                    Bana DM at.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Return to Menu Button -->
+    <div class="return-menu-container">
+        <a href="menu.html">
+            <img src="return-menu.png" class="return-menu-btn" alt="Return to Menu">
+        </a>
+    </div>
+
+    <script>
+        // --- ACCORDION LOGIC ---
+        // Selects all the black header bars
+        const faqHeaders = document.querySelectorAll('.faq-header');
+
+        faqHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                // Finds the whole box (header + content) that was clicked
+                const faqItem = header.parentElement;
+                
+                // Toggle the 'active' class to open/close it
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // --- BACK BUTTON FIX ---
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.reload(); 
+            }
+        });
+    </script>
+</body>
+</html>
