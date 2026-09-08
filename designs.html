@@ -9,10 +9,10 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #ffffff; /* White background */
+            background-color: #ffffff;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: black;
-            overflow-x: hidden; /* Prevents sideways scrolling */
+            overflow-x: hidden; 
         }
 
         /* --- CORNER LOGO --- */
@@ -35,19 +35,18 @@
         }
 
         .title-img {
-            width: 400px; /* Adjust size of main title */
+            width: 400px; 
             z-index: 10;
         }
 
         .book-btn {
-            width: 250px; /* Adjust size of book now button */
+            width: 250px; 
             margin-top: 15px;
             cursor: pointer;
             transition: transform 0.2s ease;
             z-index: 10;
         }
 
-        /* Makes the book button pop slightly when hovered */
         .book-btn:hover {
             transform: scale(1.05);
         }
@@ -57,92 +56,95 @@
             position: absolute;
             width: 80px;
             animation: spin 12s linear infinite;
-            filter: invert(1); /* Turns your white star black! */
+            filter: invert(1); 
             z-index: 1;
         }
         .header-star.left { top: -20px; left: 20%; }
-        .header-star.right { top: 40px; right: 22%; width: 60px; } /* Slightly smaller & lower */
+        .header-star.right { top: 40px; right: 22%; width: 60px; } 
 
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* --- GALLERY LAYOUT (The 3 Categories) --- */
+        /* --- GALLERY LAYOUT --- */
         .gallery-container {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: flex-start;
             max-width: 1200px;
-            margin: 0 auto; /* Centers the whole block */
+            margin: 0 auto; 
             padding: 0 20px 100px 20px;
         }
 
         .category-column {
-            flex: 1; /* Makes all 3 columns equal width */
+            flex: 1; 
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 0 20px;
-            /* Creates the vertical lines between columns */
             border-right: 1px solid black; 
         }
 
-        /* Removes the line from the very last column */
         .category-column:last-child {
             border-right: none;
         }
 
         .cat-title-img {
-            width: 180px; /* Adjust category title sizes */
+            width: 180px; 
             margin-bottom: 30px;
         }
 
         /* --- THE 2-COLUMN DESIGN GRIDS --- */
         .design-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Forces exactly 2 columns */
-            gap: 15px; /* Space between the tattoos */
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
             width: 100%;
         }
 
         .design-grid img {
-            width: 100%; /* Makes image fill its half of the grid */
-            border-radius: 8px; /* Optional: adds a tiny rounded corner */
-            cursor: pointer; /* Shows a pointing hand so people know they can click */
+            width: 100%; 
+            border-radius: 8px; 
+            cursor: pointer; 
             transition: transform 0.2s ease;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.05); /* Very faint shadow to define white images */
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.05); 
         }
 
         .design-grid img:hover {
-            transform: scale(1.05); /* Slight zoom on hover */
+            transform: scale(1.05); 
         }
 
         /* --- LIGHTBOX (Zoomed Image Pop-up) --- */
         #lightbox {
-            display: none; /* Hidden until clicked */
+            display: none; 
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: rgba(255, 255, 255, 0.95); /* Mostly solid white background */
-            z-index: 2000; /* Stays above absolutely everything */
+            background-color: rgba(255, 255, 255, 0.95); 
+            z-index: 2000; 
             align-items: center;
             justify-content: center;
             flex-direction: column;
+            /* Prevents weird highlighting when swiping */
+            user-select: none; 
         }
 
         #lightbox.active {
-            display: flex; /* Shown when active class is added */
+            display: flex; 
         }
 
         #lightbox-img {
-            max-width: 90vw;
+            max-width: 85vw;
             max-height: 85vh;
             object-fit: contain;
-            box-shadow: 0px 10px 30px rgba(0,0,0,0.15); /* Shadow to make it pop */
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.15); 
+            /* Prevents dragging the image itself on phone */
+            pointer-events: none; 
         }
 
+        /* Lightbox Controls (X and Arrows) */
         .close-btn {
             position: absolute;
             top: 30px;
@@ -152,8 +154,47 @@
             cursor: pointer;
             color: black;
             line-height: 1;
+            z-index: 2001;
         }
 
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 50px;
+            font-weight: 300;
+            cursor: pointer;
+            color: black;
+            padding: 20px;
+            z-index: 2001;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        .prev-btn { left: 30px; }
+        .next-btn { right: 30px; }
+
+      /* --- RETURN TO MENU BUTTON --- */
+        .return-menu-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 80px; 
+            width: 100%;
+        }
+
+        .return-menu-btn {
+            width: 250px; /* Adjust size based on your drawing */
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .return-menu-btn:hover {
+            transform: scale(1.05);
+        }
         /* --- MOBILE VIEW --- */
         @media (max-width: 768px) {
             .corner-logo { top: 15px; right: 15px; width: 100px; }
@@ -162,20 +203,21 @@
             .header-star.left { left: 5%; }
             .header-star.right { right: 5%; }
             
-            /* Stacks the 3 categories vertically on phones */
-            .gallery-container {
-                flex-direction: column;
-            }
+            .gallery-container { flex-direction: column; }
             .category-column {
                 width: 100%;
-                border-right: none; /* Removes vertical lines on phone */
-                border-bottom: 1px solid black; /* Adds horizontal lines instead */
+                border-right: none; 
+                border-bottom: 1px solid black; 
                 padding-bottom: 40px;
                 margin-bottom: 40px;
             }
-            .category-column:last-child {
-                border-bottom: none;
-            }
+            .category-column:last-child { border-bottom: none; }
+
+            /* Adjust lightbox arrows for smaller screens */
+            .nav-btn { font-size: 40px; padding: 10px; }
+            .prev-btn { left: 5px; }
+            .next-btn { right: 5px; }
+            .close-btn { top: 20px; right: 25px; }
         }
     </style>
 </head>
@@ -198,58 +240,38 @@
         
         <img src="star-designs.png" class="header-star right" alt="">
     </div>
-
-    <!-- ======================================================= -->
-    <!-- 🛑 INSTRUCTIONS FOR EZEL INKS: HOW TO EDIT THIS PAGE 🛑 -->
-    <!-- ======================================================= -->
     
     <!-- Gallery Area -->
     <div class="gallery-container">
         
-        <!-- 
-        HOW TO ADD A NEW DESIGN TO A CATEGORY:
-        1. Upload your new image (e.g., 'illus-4.png') to your GitHub repository.
-        2. Find the category below where you want it to go.
-        3. Copy one of the <img ...> lines and paste it right underneath the others.
-        4. Change the file name inside src="..." to your new file name.
-        The grid will automatically create a new row for it! 
-        -->
-
         <!-- CATEGORY 1: Illustrative -->
         <div class="category-column">
             <img src="cat-illustrative.png" class="cat-title-img" alt="Illustrative">
-            
             <div class="design-grid">
                 <img src="illus-1.png" class="tattoo-design" alt="Design">
                 <img src="illus-2.png" class="tattoo-design" alt="Design">
                 <img src="illus-3.png" class="tattoo-design" alt="Design">
-               <img src="illus-4.png" class="tattoo-design" alt="Design">
+                <img src="illus-4.png" class="tattoo-design" alt="Design">
                 <img src="illus-5.png" class="tattoo-design" alt="Design">
                 <img src="illus-6.png" class="tattoo-design" alt="Design">
                 <img src="illus-7.png" class="tattoo-design" alt="Design">
-                <!-- Paste new illustrative designs here: -->
-                
             </div>
         </div>
 
         <!-- CATEGORY 2: Lino Print -->
         <div class="category-column">
             <img src="cat-lino.png" class="cat-title-img" alt="Lino Print">
-            
             <div class="design-grid">
                 <img src="lino-1.png" class="tattoo-design" alt="Design">
                 <img src="lino-2.png" class="tattoo-design" alt="Design">
                 <img src="lino-3.png" class="tattoo-design" alt="Design">
                 <img src="lino-4.png" class="tattoo-design" alt="Design">
-                <!-- Paste new lino designs here: -->
-
             </div>
         </div>
 
         <!-- CATEGORY 3: Tiny Tatts -->
         <div class="category-column">
             <img src="cat-tiny.png" class="cat-title-img" alt="Tiny Tatts">
-            
             <div class="design-grid">
                 <img src="tiny-1.png" class="tattoo-design" alt="Design">
                 <img src="tiny-2.png" class="tattoo-design" alt="Design">
@@ -259,67 +281,117 @@
                 <img src="tiny-6.png" class="tattoo-design" alt="Design">
                 <img src="tiny-7.png" class="tattoo-design" alt="Design">
                 <img src="tiny-8.png" class="tattoo-design" alt="Design">
-                 <img src="tiny-9.png" class="tattoo-design" alt="Design">
+                <img src="tiny-9.png" class="tattoo-design" alt="Design">
                 <img src="tiny-10.png" class="tattoo-design" alt="Design">
                 <img src="tiny-11.png" class="tattoo-design" alt="Design">
                 <img src="tiny-12.png" class="tattoo-design" alt="Design">
-                                <img src="tiny-13.png" class="tattoo-design" alt="Design">
-                 <img src="tiny-14.png" class="tattoo-design" alt="Design">
+                <img src="tiny-13.png" class="tattoo-design" alt="Design">
+                <img src="tiny-14.png" class="tattoo-design" alt="Design">
                 <img src="tiny-15.png" class="tattoo-design" alt="Design">
                 <img src="tiny-16.png" class="tattoo-design" alt="Design">
                 <img src="tiny-17.png" class="tattoo-design" alt="Design">
-                <!-- Paste new tiny tatts designs here: -->
-
             </div>
         </div>
-
-        <!-- 
-        HOW TO ADD A BRAND NEW CATEGORY (e.g., "Traditional"):
-        1. Upload your new title image (e.g., 'cat-traditional.png') to GitHub.
-        2. Copy this entire block of code below, from <div class="category-column"> to </div>
-        3. Paste it RIGHT HERE, just above the closing </div> of the gallery-container.
-        4. Change the title image src and the design images inside it.
-        (Because we used Flexbox, the website will automatically shrink the columns to fit 4 side-by-side!)
-        
-        [COPY BELOW THIS LINE]
-        <div class="category-column">
-            <img src="YOUR-NEW-TITLE.png" class="cat-title-img" alt="New Category">
-            <div class="design-grid">
-                <img src="new-design-1.png" class="tattoo-design" alt="Design">
-            </div>
-        </div>
-        [COPY ABOVE THIS LINE]
-        -->
 
     </div>
-
-    <!-- The Lightbox (Hidden by default, shows zoomed images) -->
+<div class="return-menu-container">
+        <a href="menu.html">
+            <img src="return-menu.png" class="return-menu-btn" alt="Return to Menu">
+        </a>
+    </div>
+    <!-- The Lightbox (Zoomed Image Pop-up) -->
     <div id="lightbox">
         <span class="close-btn" id="close-lightbox">&times;</span>
+        <span class="nav-btn prev-btn" id="prev-btn">&#10094;</span> <!-- Left Arrow -->
         <img id="lightbox-img" src="" alt="Zoomed Design">
+        <span class="nav-btn next-btn" id="next-btn">&#10095;</span> <!-- Right Arrow -->
     </div>
 
     <script>
-        // --- LIGHTBOX LOGIC ---
+        // --- ADVANCED LIGHTBOX LOGIC ---
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const closeBtn = document.getElementById('close-lightbox');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        
         const allDesigns = document.querySelectorAll('.tattoo-design');
+        
+        let currentCategoryArray = [];
+        let currentIndex = 0;
 
-        // 1. When any design is clicked, show it in the lightbox
+        // 1. Click on a design to open it
         allDesigns.forEach(design => {
             design.addEventListener('click', function() {
-                lightboxImg.src = this.src; // Copies the clicked image source
-                lightbox.classList.add('active'); // Shows the lightbox
+                // Find all images within the exact same grid column as the clicked image
+                const parentGrid = this.closest('.design-grid');
+                currentCategoryArray = Array.from(parentGrid.querySelectorAll('.tattoo-design'));
+                
+                // Find what number image we clicked in that specific category
+                currentIndex = currentCategoryArray.indexOf(this);
+                
+                updateLightboxImage();
+                lightbox.classList.add('active'); 
             });
         });
 
-        // 2. When the 'X' is clicked, hide the lightbox
+        // 2. Function to update the picture source
+        function updateLightboxImage() {
+            lightboxImg.src = currentCategoryArray[currentIndex].src;
+        }
+
+        // 3. Next Image Function (Loops to start if at the end)
+        function showNext() {
+            if(currentCategoryArray.length === 0) return;
+            currentIndex = (currentIndex + 1) % currentCategoryArray.length;
+            updateLightboxImage();
+        }
+
+        // 4. Previous Image Function (Loops to end if at the start)
+        function showPrev() {
+            if(currentCategoryArray.length === 0) return;
+            currentIndex = (currentIndex - 1 + currentCategoryArray.length) % currentCategoryArray.length;
+            updateLightboxImage();
+        }
+
+        // 5. Button Listeners for Arrows
+        nextBtn.addEventListener('click', showNext);
+        prevBtn.addEventListener('click', showPrev);
+
+        // 6. Keyboard Listeners (Left/Right Arrows and Escape to close)
+        document.addEventListener('keydown', function(event) {
+            if (!lightbox.classList.contains('active')) return;
+            if (event.key === 'ArrowRight') showNext();
+            if (event.key === 'ArrowLeft') showPrev();
+            if (event.key === 'Escape') lightbox.classList.remove('active');
+        });
+
+        // 7. Mobile Touch/Swipe Detection
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        lightbox.addEventListener('touchstart', function(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        }, false);
+
+        lightbox.addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            // Swiped left (go to next image)
+            if (touchEndX < touchStartX - 50) showNext();
+            // Swiped right (go to previous image)
+            if (touchEndX > touchStartX + 50) showPrev();
+        }
+
+        // 8. Close the lightbox
         closeBtn.addEventListener('click', function() {
             lightbox.classList.remove('active');
         });
 
-        // 3. (Optional but nice) If they click anywhere in the white background, also close it
+        // Close if they click the white background (but NOT if they click the arrows or image)
         lightbox.addEventListener('click', function(event) {
             if (event.target === lightbox) {
                 lightbox.classList.remove('active');
