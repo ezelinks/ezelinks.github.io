@@ -18,8 +18,8 @@
 
         /* --- CORNER LOGO --- */
         .corner-logo {
-            position: absolute;
-            top: -15px; 
+            position: fixed;
+            top: 25px;
             right: 40px;
             width: 150px;
             z-index: 1000;
@@ -38,14 +38,15 @@
 
         .title-img {
             width: 350px; 
-            margin-bottom: 15px;
+            z-index: 10;
         }
 
         .book-btn {
             width: 250px; 
+            margin-top: 15px;
             cursor: pointer;
             transition: transform 0.2s ease;
-            margin-bottom: 20px;
+            z-index: 10;
         }
 
         .book-btn:hover {
@@ -58,6 +59,8 @@
             flex-direction: row;
             gap: 20px; 
             justify-content: center;
+            margin-top: 15px;
+            z-index: 10;
         }
 
         .sub-btn {
@@ -225,11 +228,8 @@
 
         /* --- MOBILE VIEW --- */
         @media (max-width: 768px) {
-            /* Keep logo highly pinned */
-            .corner-logo { top: -5px; right: 15px; width: 75px; }
-            
-            .header-section { margin-top: 100px; }
-            .title-img { width: 280px; }
+            .corner-logo { top: 15px; right: 15px; width: 100px; }
+            .title-img { width: 300px; }
             .book-btn { width: 200px; }
             
             .sub-btn { width: 140px; }
@@ -246,7 +246,7 @@
             /* Safe lane padding for content */
             .content-container { padding: 0 35px; }
 
-            /* Push stars into the safe lanes */
+            /* Push stars into the safe lanes avoiding the boxes entirely */
             .star-1 { top: 350px; left: -10px; width: 40px; }
             .star-2 { top: 600px; right: -15px; width: 50px; }
             .star-3 { top: 1100px; left: -5px; width: 45px; }
