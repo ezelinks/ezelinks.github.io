@@ -18,8 +18,8 @@
 
         /* --- CORNER LOGO --- */
         .corner-logo {
-            position: absolute;
-            top: -15px; /* Negative number pushes it higher than the page border */
+            position: fixed;
+            top: 25px;
             right: 40px;
             width: 150px;
             z-index: 1000;
@@ -33,19 +33,19 @@
             align-items: center;
             margin-top: 60px;
             margin-bottom: 50px;
-            z-index: 10;
         }
 
         .title-img {
-            width: 350px; 
-            margin-bottom: 15px;
+            width: 400px; 
+            z-index: 10;
         }
 
         .book-btn {
             width: 250px; 
+            margin-top: 15px;
             cursor: pointer;
             transition: transform 0.2s ease;
-            margin-bottom: 20px;
+            z-index: 10;
         }
 
         .book-btn:hover {
@@ -58,6 +58,8 @@
             flex-direction: row;
             gap: 20px; 
             justify-content: center;
+            margin-top: 15px;
+            z-index: 10;
         }
 
         .sub-btn {
@@ -181,11 +183,8 @@
 
         /* --- MOBILE VIEW --- */
         @media (max-width: 768px) {
-            /* Negative top value aggressively pushes the logo up on phones */
-            .corner-logo { top: -5px; right: 15px; width: 75px; }
-            
-            .header-section { margin-top: 100px; }
-            .title-img { width: 280px; }
+            .corner-logo { top: 15px; right: 15px; width: 100px; }
+            .title-img { width: 300px; }
             .book-btn { width: 200px; }
             
             .sub-btn { width: 140px; }
@@ -199,14 +198,15 @@
 
             .faq-container { padding: 0 35px; }
 
-            .star-1 { top: 300px; left: -10px; width: 35px; }
-            .star-2 { top: 450px; right: -15px; width: 45px; }
-            .star-3 { top: 600px; left: -5px; width: 40px; }
-            .star-4 { top: 750px; right: -10px; width: 35px; }
-            .star-5 { top: 900px; left: -15px; width: 45px; }
-            .star-6 { top: 1050px; right: -5px; width: 35px; }
-            .star-7 { top: 1200px; left: -10px; width: 40px; }
-            .star-8 { top: 1350px; right: -15px; width: 30px; }
+            /* Stars adjusted downwards to avoid the new header buttons */
+            .star-1 { top: 350px; left: -10px; width: 35px; }
+            .star-2 { top: 500px; right: -15px; width: 45px; }
+            .star-3 { top: 650px; left: -5px; width: 40px; }
+            .star-4 { top: 800px; right: -10px; width: 35px; }
+            .star-5 { top: 950px; left: -15px; width: 45px; }
+            .star-6 { top: 1100px; right: -5px; width: 35px; }
+            .star-7 { top: 1250px; left: -10px; width: 40px; }
+            .star-8 { top: 1400px; right: -15px; width: 30px; }
         }
     </style>
 </head>
