@@ -9,10 +9,10 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
+            background-color: #ffffff; /* White background */
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: black;
-            overflow-x: hidden; 
+            overflow-x: hidden; /* Prevents sideways scrolling */
         }
 
         /* --- CORNER LOGO --- */
@@ -51,12 +51,32 @@
             transform: scale(1.05);
         }
 
+        /* --- HORIZONTAL SUB-BUTTONS --- */
+        .sub-nav-container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; 
+            justify-content: center;
+            margin-top: 15px;
+            z-index: 10;
+        }
+
+        .sub-btn {
+            width: 180px; 
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .sub-btn:hover {
+            transform: scale(1.05);
+        }
+
         /* Asymmetrical Rotating Stars */
         .header-star {
             position: absolute;
             width: 80px;
             animation: spin 12s linear infinite;
-            filter: invert(1); 
+            filter: invert(1); /* Turns your white star black! */
             z-index: 1;
         }
         .header-star.left { top: -20px; left: 20%; }
@@ -67,80 +87,80 @@
             to { transform: rotate(360deg); }
         }
 
-        /* --- GALLERY LAYOUT --- */
+        /* --- GALLERY LAYOUT (The 3 Categories) --- */
         .gallery-container {
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: flex-start;
             max-width: 1200px;
-            margin: 0 auto; 
+            margin: 0 auto; /* Centers the whole block */
             padding: 0 20px 100px 20px;
         }
 
         .category-column {
-            flex: 1; 
+            flex: 1; /* Makes all 3 columns equal width */
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 0 20px;
+            /* Creates the vertical lines between columns */
             border-right: 1px solid black; 
         }
 
+        /* Removes the line from the very last column */
         .category-column:last-child {
             border-right: none;
         }
 
         .cat-title-img {
-            width: 180px; 
+            width: 180px; /* Adjust category title sizes */
             margin-bottom: 30px;
         }
 
         /* --- THE 2-COLUMN DESIGN GRIDS --- */
         .design-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; 
+            grid-template-columns: repeat(2, 1fr); /* Forces exactly 2 columns */
+            gap: 15px; /* Space between the tattoos */
             width: 100%;
         }
 
         .design-grid img {
-            width: 100%; 
-            border-radius: 8px; 
-            cursor: pointer; 
+            width: 100%; /* Makes image fill its half of the grid */
+            border-radius: 8px; /* Optional: adds a tiny rounded corner */
+            cursor: pointer; /* Shows a pointing hand so people know they can click */
             transition: transform 0.2s ease;
-            box-shadow: 0px 4px 10px rgba(0,0,0,0.05); 
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.05); /* Very faint shadow to define white images */
         }
 
         .design-grid img:hover {
-            transform: scale(1.05); 
+            transform: scale(1.05); /* Slight zoom on hover */
         }
 
         /* --- LIGHTBOX (Zoomed Image Pop-up) --- */
         #lightbox {
-            display: none; 
+            display: none; /* Hidden until clicked */
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background-color: rgba(255, 255, 255, 0.95); 
-            z-index: 2000; 
+            background-color: rgba(255, 255, 255, 0.95); /* Mostly solid white background */
+            z-index: 2000; /* Stays above absolutely everything */
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            /* Prevents weird highlighting when swiping */
             user-select: none; 
         }
 
         #lightbox.active {
-            display: flex; 
+            display: flex; /* Shown when active class is added */
         }
 
         #lightbox-img {
             max-width: 85vw;
             max-height: 85vh;
             object-fit: contain;
-            box-shadow: 0px 10px 30px rgba(0,0,0,0.15); 
-            /* Prevents dragging the image itself on phone */
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.15); /* Shadow to make it pop */
             pointer-events: none; 
         }
 
@@ -177,7 +197,7 @@
         .prev-btn { left: 30px; }
         .next-btn { right: 30px; }
 
-      /* --- RETURN TO MENU BUTTON --- */
+        /* --- RETURN TO MENU BUTTON --- */
         .return-menu-container {
             display: flex;
             justify-content: center;
@@ -195,30 +215,35 @@
         .return-menu-btn:hover {
             transform: scale(1.05);
         }
-     /* --- MOBILE VIEW --- */
+
+        /* --- MOBILE VIEW --- */
         @media (max-width: 768px) {
-            /* Shrunk slightly more to 75px */
-            .corner-logo { position: absolute; top: 15px; right: 15px; width: 75px; }
-            
-            /* FIXED: Pushed the entire title block WAY down so it sits below the logo */
-            .header-section { margin-top: 120px; }
-            
-            .title-img { width: 280px; }
+            .corner-logo { top: 15px; right: 15px; width: 100px; }
+            .title-img { width: 300px; }
             .book-btn { width: 200px; }
             
-            /* Stars adjusted to clear the title */
+            /* ADDED: Scaling for the new sub-buttons on phone */
+            .sub-btn { width: 140px; }
+            .sub-nav-container { gap: 10px; }
+
+            /* ADDED: Stars explicitly placed in safe zones to avoid overlapping buttons */
             .header-star.left { top: -20px; left: 2%; width: 50px; }
-            .header-star.right { top: 60px; right: 2%; width: 45px; }
+            .header-star.right { top: 80px; right: 2%; width: 45px; }
             
-            .gallery-container { flex-direction: column; }
+            /* Stacks the 3 categories vertically on phones */
+            .gallery-container {
+                flex-direction: column;
+            }
             .category-column {
                 width: 100%;
-                border-right: none; 
-                border-bottom: 1px solid black; 
+                border-right: none; /* Removes vertical lines on phone */
+                border-bottom: 1px solid black; /* Adds horizontal lines instead */
                 padding-bottom: 40px;
                 margin-bottom: 40px;
             }
-            .category-column:last-child { border-bottom: none; }
+            .category-column:last-child {
+                border-bottom: none;
+            }
 
             /* Adjust lightbox arrows for smaller screens */
             .nav-btn { font-size: 40px; padding: 10px; }
@@ -244,9 +269,23 @@
         <a href="https://instagram.com/ezel.inks" target="_blank">
             <img src="book-now.png" class="book-btn" alt="Book Now">
         </a>
+
+        <!-- ADDED: Horizontal Links to other pages -->
+        <div class="sub-nav-container">
+            <a href="pricing.html">
+                <img src="btn-pricing.png" class="sub-btn" alt="Pricing">
+            </a>
+            <a href="custom.html">
+                <img src="btn-custom.png" class="sub-btn" alt="Custom Designs">
+            </a>
+        </div>
         
         <img src="star-designs.png" class="header-star right" alt="">
     </div>
+
+    <!-- ======================================================= -->
+    <!-- 🛑 INSTRUCTIONS FOR EZEL INKS: HOW TO EDIT THIS PAGE 🛑 -->
+    <!-- ======================================================= -->
     
     <!-- Gallery Area -->
     <div class="gallery-container">
@@ -254,6 +293,7 @@
         <!-- CATEGORY 1: Illustrative -->
         <div class="category-column">
             <img src="cat-illustrative.png" class="cat-title-img" alt="Illustrative">
+            
             <div class="design-grid">
                 <img src="illus-1.png" class="tattoo-design" alt="Design">
                 <img src="illus-2.png" class="tattoo-design" alt="Design">
@@ -262,23 +302,29 @@
                 <img src="illus-5.png" class="tattoo-design" alt="Design">
                 <img src="illus-6.png" class="tattoo-design" alt="Design">
                 <img src="illus-7.png" class="tattoo-design" alt="Design">
+                <!-- Paste new illustrative designs here: -->
+                
             </div>
         </div>
 
         <!-- CATEGORY 2: Lino Print -->
         <div class="category-column">
             <img src="cat-lino.png" class="cat-title-img" alt="Lino Print">
+            
             <div class="design-grid">
                 <img src="lino-1.png" class="tattoo-design" alt="Design">
                 <img src="lino-2.png" class="tattoo-design" alt="Design">
                 <img src="lino-3.png" class="tattoo-design" alt="Design">
                 <img src="lino-4.png" class="tattoo-design" alt="Design">
+                <!-- Paste new lino designs here: -->
+
             </div>
         </div>
 
         <!-- CATEGORY 3: Tiny Tatts -->
         <div class="category-column">
             <img src="cat-tiny.png" class="cat-title-img" alt="Tiny Tatts">
+            
             <div class="design-grid">
                 <img src="tiny-1.png" class="tattoo-design" alt="Design">
                 <img src="tiny-2.png" class="tattoo-design" alt="Design">
@@ -297,15 +343,19 @@
                 <img src="tiny-15.png" class="tattoo-design" alt="Design">
                 <img src="tiny-16.png" class="tattoo-design" alt="Design">
                 <img src="tiny-17.png" class="tattoo-design" alt="Design">
+                <!-- Paste new tiny tatts designs here: -->
+
             </div>
         </div>
 
     </div>
-<div class="return-menu-container">
+    
+    <div class="return-menu-container">
         <a href="menu.html">
             <img src="return-menu.png" class="return-menu-btn" alt="Return to Menu">
         </a>
     </div>
+
     <!-- The Lightbox (Zoomed Image Pop-up) -->
     <div id="lightbox">
         <span class="close-btn" id="close-lightbox">&times;</span>
