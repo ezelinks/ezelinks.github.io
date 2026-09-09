@@ -16,15 +16,6 @@
             position: relative; /* For the scattered background stars */
         }
 
-        /* --- CORNER LOGO --- */
-        .corner-logo {
-            position: fixed;
-            top: 25px;
-            right: 40px;
-            width: 150px;
-            z-index: 1000;
-        }
-
         /* --- HEADER SECTION --- */
         .header-section {
             position: relative;
@@ -33,6 +24,7 @@
             align-items: center;
             margin-top: 60px;
             margin-bottom: 50px;
+            z-index: 10;
         }
 
         .title-img {
@@ -86,15 +78,16 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Scattered Star Placements */
-        .star-1 { top: 250px; left: 8%; width: 50px; }
-        .star-2 { top: 400px; right: 10%; width: 70px; }
-        .star-3 { top: 580px; left: 12%; width: 80px; }
-        .star-4 { top: 750px; right: 8%; width: 45px; }
-        .star-5 { top: 920px; left: 6%; width: 60px; }
-        .star-6 { top: 1080px; right: 11%; width: 55px; }
-        .star-7 { top: 1250px; left: 9%; width: 40px; }
-        .star-8 { top: 1400px; right: 7%; width: 65px; }
+        /* Top Stars */
+        .star-top-1 { top: 30px; left: 12%; width: 50px; }
+        .star-top-2 { top: 90px; right: 15%; width: 60px; }
+        .star-top-3 { top: 220px; left: 8%; width: 45px; }
+        .star-top-4 { top: 250px; right: 10%; width: 55px; }
+
+        /* Bottom Stars */
+        .star-bot-1 { top: -20px; left: -70px; width: 50px; }
+        .star-bot-2 { top: 80px; right: -50px; width: 45px; }
+        .star-bot-3 { bottom: -10px; left: -30px; width: 55px; }
 
         /* --- FAQ / PRICING ACCORDION --- */
         .faq-container {
@@ -160,30 +153,67 @@
             font-style: italic;
         }
 
-        /* --- RETURN TO MENU BUTTON --- */
-        .return-menu-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            margin-bottom: 80px; 
-            width: 100%;
-            z-index: 10;
+        /* --- FOOTER SECTION (Watermark, Menu, Copyright) --- */
+        .footer-section {
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 60px;
+            padding-top: 40px; 
+        }
+
+        .bottom-logo {
+            width: 150px;
+            margin-bottom: 25px; 
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            z-index: 10;
+        }
+
+        .bottom-logo:hover {
+            transform: scale(1.05);
         }
 
         .return-menu-btn {
-            width: 250px; 
+            width: 250px;
             cursor: pointer;
             transition: transform 0.2s ease;
+            margin-bottom: 40px;
+            z-index: 10;
         }
 
         .return-menu-btn:hover {
             transform: scale(1.05);
         }
 
+        /* Copyright Text Block */
+        .copyright-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .copy-eng {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #555555; 
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .copy-turk {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #888888; 
+            font-size: 0.85rem;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
         /* --- MOBILE VIEW --- */
         @media (max-width: 768px) {
-            .corner-logo { top: 15px; right: 15px; width: 100px; }
             .title-img { width: 300px; }
             .book-btn { width: 200px; }
             
@@ -198,37 +228,29 @@
 
             .faq-container { padding: 0 35px; }
 
-            /* Stars adjusted downwards to avoid the new header buttons */
-            .star-1 { top: 350px; left: -10px; width: 35px; }
-            .star-2 { top: 500px; right: -15px; width: 45px; }
-            .star-3 { top: 650px; left: -5px; width: 40px; }
-            .star-4 { top: 800px; right: -10px; width: 35px; }
-            .star-5 { top: 950px; left: -15px; width: 45px; }
-            .star-6 { top: 1100px; right: -5px; width: 35px; }
-            .star-7 { top: 1250px; left: -10px; width: 40px; }
-            .star-8 { top: 1400px; right: -15px; width: 30px; }
+            /* Safe lanes for the stars */
+            .star-top-1 { top: 40px; left: -10px; width: 40px; }
+            .star-top-2 { top: 120px; right: -15px; width: 50px; }
+            .star-top-3 { top: 250px; left: -5px; width: 35px; }
+            .star-top-4 { top: 280px; right: -10px; width: 45px; }
+
+            .star-bot-1 { left: -5px; width: 45px; }
+            .star-bot-2 { right: -10px; width: 35px; }
+            .star-bot-3 { left: 0px; width: 40px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Watermark Logo -->
-    <a href="menu.html">
-        <img src="watermark.png" class="corner-logo" alt="Ezel Inks">
-    </a>
-
-    <!-- Background Scattered Stars -->
-    <img src="star-pricing.png" class="bg-star star-1" alt="">
-    <img src="star-pricing.png" class="bg-star star-2" alt="">
-    <img src="star-pricing.png" class="bg-star star-3" alt="">
-    <img src="star-pricing.png" class="bg-star star-4" alt="">
-    <img src="star-pricing.png" class="bg-star star-5" alt="">
-    <img src="star-pricing.png" class="bg-star star-6" alt="">
-    <img src="star-pricing.png" class="bg-star star-7" alt="">
-    <img src="star-pricing.png" class="bg-star star-8" alt="">
-
     <!-- Header Section -->
     <div class="header-section">
+        
+        <!-- Background Stars near Title -->
+        <img src="star-pricing.png" class="bg-star star-top-1" alt="">
+        <img src="star-pricing.png" class="bg-star star-top-2" alt="">
+        <img src="star-pricing.png" class="bg-star star-top-3" alt="">
+        <img src="star-pricing.png" class="bg-star star-top-4" alt="">
+
         <img src="title-pricing.png" class="title-img" alt="Pricing">
         
         <a href="https://instagram.com/ezel.inks" target="_blank">
@@ -331,11 +353,33 @@
 
     </div>
 
-    <!-- Return to Menu Button -->
-    <div class="return-menu-container">
+    <!-- --- FOOTER SECTION --- -->
+    <div class="footer-section">
+        
+        <!-- 3 Stars wrapping the footer area -->
+        <img src="star-pricing.png" class="bg-star star-bot-1" alt="">
+        <img src="star-pricing.png" class="bg-star star-bot-2" alt="">
+        <img src="star-pricing.png" class="bg-star star-bot-3" alt="">
+
+        <!-- Watermark linked to menu -->
+        <a href="menu.html">
+            <img src="watermark.png" class="bottom-logo" alt="Ezel Inks">
+        </a>
+
+        <!-- Return to Menu Button -->
         <a href="menu.html">
             <img src="return-menu.png" class="return-menu-btn" alt="Return to Menu">
         </a>
+
+        <!-- Copyright Text -->
+        <div class="copyright-container">
+            <div class="copy-eng">
+                © 2026, Ezel Kelebek. All designs on this site are protected by copyright. Unauthorized use is prohibited. And, stealing from an artist sucks in general.
+            </div>
+            <div class="copy-turk">
+                © 2026, Ezel Kelebek. Bu sitedeki tüm tasarımlar telif hakkıyla korunmaktadır. İzinsiz kullanımı yasaktır. Ayrıca, bir sanatçıdan çalmak tatsız bir hareket.
+            </div>
+        </div>
     </div>
 
     <script>
