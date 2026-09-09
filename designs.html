@@ -13,15 +13,7 @@
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: black;
             overflow-x: hidden; /* Prevents sideways scrolling */
-        }
-
-        /* --- CORNER LOGO --- */
-        .corner-logo {
-            position: fixed;
-            top: 25px;
-            right: 40px;
-            width: 150px;
-            z-index: 1000;
+            position: relative; /* For the new background stars */
         }
 
         /* --- HEADER SECTION --- */
@@ -71,7 +63,7 @@
             transform: scale(1.05);
         }
 
-        /* Asymmetrical Rotating Stars */
+        /* Asymmetrical Rotating Stars (Original) */
         .header-star {
             position: absolute;
             width: 80px;
@@ -81,6 +73,23 @@
         }
         .header-star.left { top: -20px; left: 20%; }
         .header-star.right { top: 40px; right: 22%; width: 60px; } 
+
+        /* New Background Stars */
+        .bg-star {
+            position: absolute;
+            animation: spin 15s linear infinite;
+            filter: invert(1);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .bg-star.top-1 { top: 120px; left: 5%; width: 45px; }
+        .bg-star.top-2 { top: 80px; right: 8%; width: 55px; }
+        
+        /* Bottom stars will be positioned relative to the footer container */
+        .bg-star.bot-1 { top: -40px; left: -80px; width: 60px; }
+        .bg-star.bot-2 { top: 100px; right: -60px; width: 45px; }
+        .bg-star.bot-3 { bottom: -20px; left: -40px; width: 50px; }
 
         @keyframes spin {
             from { transform: rotate(0deg); }
@@ -197,47 +206,91 @@
         .prev-btn { left: 30px; }
         .next-btn { right: 30px; }
 
-        /* --- RETURN TO MENU BUTTON --- */
-        .return-menu-container {
+        /* --- FOOTER SECTION (Watermark, Menu, Copyright) --- */
+        .footer-section {
+            position: relative;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             margin-top: 20px;
-            margin-bottom: 80px; 
-            width: 100%;
+            margin-bottom: 60px;
+            padding-top: 40px; /* Space between gallery and footer */
+        }
+
+        .bottom-logo {
+            width: 150px;
+            margin-bottom: 25px; /* Snug spacing to the button below */
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            z-index: 10;
+        }
+
+        .bottom-logo:hover {
+            transform: scale(1.05);
         }
 
         .return-menu-btn {
-            width: 250px; /* Adjust size based on your drawing */
+            width: 250px;
             cursor: pointer;
             transition: transform 0.2s ease;
+            margin-bottom: 40px;
+            z-index: 10;
         }
 
         .return-menu-btn:hover {
             transform: scale(1.05);
         }
 
+        /* Copyright Text Block */
+        .copyright-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .copy-eng {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #555555; /* Dark gray */
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .copy-turk {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #888888; /* Lighter gray */
+            font-size: 0.85rem;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
         /* --- MOBILE VIEW --- */
         @media (max-width: 768px) {
-            .corner-logo { top: 15px; right: 15px; width: 100px; }
             .title-img { width: 300px; }
             .book-btn { width: 200px; }
             
-            /* Sub-buttons formatting for mobile */
             .sub-btn { width: 140px; }
             .sub-nav-container { gap: 10px; }
 
-            /* Stars positioned to avoid overlapping with new header buttons on mobile */
             .header-star.left { top: -20px; left: 2%; width: 50px; }
             .header-star.right { top: 80px; right: 2%; width: 45px; }
             
-            /* Stacks the 3 categories vertically on phones */
+            /* Safe lanes for the new background stars */
+            .bg-star.top-1 { top: 150px; left: -10px; }
+            .bg-star.top-2 { top: 120px; right: -15px; }
+            
+            .bg-star.bot-1 { left: -10px; width: 45px; }
+            .bg-star.bot-2 { right: -15px; width: 35px; }
+            .bg-star.bot-3 { left: 0px; width: 40px; }
+            
             .gallery-container {
                 flex-direction: column;
             }
             .category-column {
                 width: 100%;
-                border-right: none; /* Removes vertical lines on phone */
-                border-bottom: 1px solid black; /* Adds horizontal lines instead */
+                border-right: none; 
+                border-bottom: 1px solid black; 
                 padding-bottom: 40px;
                 margin-bottom: 40px;
             }
@@ -245,7 +298,6 @@
                 border-bottom: none;
             }
 
-            /* Adjust lightbox arrows for smaller screens */
             .nav-btn { font-size: 40px; padding: 10px; }
             .prev-btn { left: 5px; }
             .next-btn { right: 5px; }
@@ -255,13 +307,13 @@
 </head>
 <body>
 
-    <!-- Watermark (Goes back to Menu) -->
-    <a href="menu.html">
-        <img src="watermark.png" class="corner-logo" alt="Ezel Inks">
-    </a>
-
     <!-- Header (Title, Button, Stars) -->
     <div class="header-section">
+        
+        <!-- New Background Stars near Title -->
+        <img src="star-designs.png" class="bg-star top-1" alt="">
+        <img src="star-designs.png" class="bg-star top-2" alt="">
+
         <img src="star-designs.png" class="header-star left" alt="">
         
         <img src="title-designs.png" class="title-img" alt="Available Designs">
@@ -302,8 +354,6 @@
                 <img src="illus-5.png" class="tattoo-design" alt="Design">
                 <img src="illus-6.png" class="tattoo-design" alt="Design">
                 <img src="illus-7.png" class="tattoo-design" alt="Design">
-                <!-- Paste new illustrative designs here: -->
-                
             </div>
         </div>
 
@@ -316,8 +366,6 @@
                 <img src="lino-2.png" class="tattoo-design" alt="Design">
                 <img src="lino-3.png" class="tattoo-design" alt="Design">
                 <img src="lino-4.png" class="tattoo-design" alt="Design">
-                <!-- Paste new lino designs here: -->
-
             </div>
         </div>
 
@@ -343,17 +391,38 @@
                 <img src="tiny-15.png" class="tattoo-design" alt="Design">
                 <img src="tiny-16.png" class="tattoo-design" alt="Design">
                 <img src="tiny-17.png" class="tattoo-design" alt="Design">
-                <!-- Paste new tiny tatts designs here: -->
-
             </div>
         </div>
 
     </div>
     
-    <div class="return-menu-container">
+    <!-- --- FOOTER SECTION --- -->
+    <div class="footer-section">
+        
+        <!-- 3 Stars wrapping the footer area -->
+        <img src="star-designs.png" class="bg-star bot-1" alt="">
+        <img src="star-designs.png" class="bg-star bot-2" alt="">
+        <img src="star-designs.png" class="bg-star bot-3" alt="">
+
+        <!-- Watermark linked to menu -->
+        <a href="menu.html">
+            <img src="watermark.png" class="bottom-logo" alt="Ezel Inks">
+        </a>
+
+        <!-- Return to Menu Button -->
         <a href="menu.html">
             <img src="return-menu.png" class="return-menu-btn" alt="Return to Menu">
         </a>
+
+        <!-- Copyright Text -->
+        <div class="copyright-container">
+            <div class="copy-eng">
+                © 2026, Ezel Kelebek. All designs on this site are protected by copyright. Unauthorized use is prohibited. And, stealing from an artist sucks in general.
+            </div>
+            <div class="copy-turk">
+                © 2026, Ezel Kelebek. Bu sitedeki tüm tasarımlar telif hakkıyla korunmaktadır. İzinsiz kullanımı yasaktır. Ayrıca, bir sanatçıdan çalmak tatsız bir hareket.
+            </div>
+        </div>
     </div>
 
     <!-- The Lightbox (Zoomed Image Pop-up) -->
